@@ -49,7 +49,7 @@ public class SLL {
 
     public void insertLast(Object o) {
         SLLNode tmp = first;
-        while(tmp.succ != null) {
+        while (tmp.succ != null) {
             tmp = tmp.succ;
         }
         SLLNode ins = new SLLNode(o, null);
@@ -71,8 +71,8 @@ public class SLL {
 //            System.out.println("Listata e prazna");
 //        }
 //        return null;
-        for(SLLNode tmp = first;  tmp != null; tmp=tmp.succ)
-            if(o.equals(tmp.element))
+        for (SLLNode tmp = first; tmp != null; tmp = tmp.succ)
+            if (o.equals(tmp.element))
                 return tmp;
         return null;
     }
@@ -84,6 +84,32 @@ public class SLL {
         return counter;
     }
 
+    public void deleteNode(Object o) {
+        //1->2->3->4-5, sakame 3 da izbriseme
+        // na 2 sledbenik da bide na 3 sledbenikot
+        SLLNode tmp = first;
+
+        while (tmp.succ != null) {
+            if (tmp.succ.element == o) {
+                tmp.succ = tmp.succ.succ;
+            }
+            tmp = tmp.succ;
+        }
+    }
+
+    public void reverseList() {
+        SLLNode current = first;
+        SLLNode prev = null;
+        SLLNode next;
+
+        while(current != null) { // 1->2->3->4->5
+            next = current.succ; //
+            current.succ = prev;
+            prev = current;
+            current = next;
+        }
+        first = prev;
+    }
 
 
     public static void main(String[] args) {
@@ -110,6 +136,30 @@ public class SLL {
         System.out.println("----------------------TEST INSERT LAST----------------------");
         leagueChamps.insertLast("Hexodian");
         leagueChamps.printNodes();
+
+        System.out.println("----------------------TEST DELETE NODE----------------------");
+        System.out.println("List before delete jhin");
+        leagueChamps.printNodes();
+        leagueChamps.deleteNode("Jhin");
+        System.out.println("List after delete jhin");
+        leagueChamps.printNodes();
+
+
+        System.out.println("----------------------TEST REVERSE SLL (pomos)----------------------");
+        SLL numList = new SLL();
+        numList.insertFirst(1);
+        numList.insertLast(2);
+        numList.insertLast(3);
+        numList.insertLast(4);
+        numList.insertLast(5);
+        numList.insertLast(6);
+        System.out.println("List before sort");
+        numList.printNodes();
+        numList.reverseList();
+        System.out.println("List after sort");
+        numList.printNodes();
+
+
     }
 
 }

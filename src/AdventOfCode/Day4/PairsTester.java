@@ -62,8 +62,8 @@ class Pairs {
 
 		//(2,5)   (1,4)  -> true
 		// (1,3)  (4,6) -> false
-		//TODO check overlap
-		return true;
+		// 4-5 1-2
+		return b >= c && a <= d;
 	}
 
 	public void increaseCountPart1() {
